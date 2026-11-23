@@ -1,0 +1,468 @@
+
+:root {
+  /* Cores principais */
+  --cor-primaria: #2563eb;
+  --cor-primaria-escura: #1d4ed8;
+  --cor-secundaria: #64748b;
+
+  /* Cores de feedback / status */
+  --cor-sucesso: #16a34a;
+  --cor-sucesso-bg: #dcfce7;
+  --cor-perigo: #dc2626;
+  --cor-perigo-bg: #fee2e2;
+  --cor-alerta: #ca8a04;
+  --cor-alerta-bg: #fef9c3;
+
+  /* Neutras */
+  --cor-fundo: #f5f7fa;
+  --cor-fundo-card: #ffffff;
+  --cor-texto: #1f2937;
+  --cor-texto-claro: #6b7280;
+  --cor-borda: #e2e8f0;
+
+  /* Layout */
+  --espaco-xs: 4px;
+  --espaco-sm: 8px;
+  --espaco-md: 16px;
+  --espaco-lg: 24px;
+  --espaco-xl: 32px;
+  --raio: 8px;
+  --raio-sm: 4px;
+  --sombra: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --sombra-modal: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+  --largura-menu: 230px;
+  --fonte: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+/* -------------------------------------------------------------
+   2. RESET BÁSICO
+   ------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fonte);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+}
+
+/* -------------------------------------------------------------
+   3. LAYOUT GERAL (menu + conteúdo)
+   ------------------------------------------------------------- */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.conteudo {
+  flex: 1;
+  padding: var(--espaco-lg);
+  max-width: 100%;
+}
+
+.pagina-titulo {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: var(--espaco-lg);
+}
+
+/* -------------------------------------------------------------
+   4. MENU LATERAL
+   ------------------------------------------------------------- */
+.menu-lateral {
+  width: var(--largura-menu);
+  min-height: 100vh;
+  background-color: #111827;
+  color: #f9fafb;
+  padding: var(--espaco-lg) 0;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.menu-lateral__titulo {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0 var(--espaco-lg) var(--espaco-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: var(--espaco-md);
+}
+
+.menu-lateral__links {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-lateral__link {
+  padding: 12px var(--espaco-lg);
+  color: #cbd5e1;
+  font-size: 15px;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.menu-lateral__link:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.menu-lateral__link.ativo {
+  color: #ffffff;
+  border-left-color: var(--cor-primaria);
+  background-color: rgba(37, 99, 235, 0.15);
+}
+
+/* Botão hambúrguer (some em telas grandes) */
+.menu-botao-abrir {
+  display: none;
+  background: var(--cor-primaria);
+  color: #fff;
+  padding: var(--espaco-sm) var(--espaco-md);
+  border-radius: var(--raio-sm);
+  margin: var(--espaco-md);
+  font-weight: 600;
+}
+
+/* -------------------------------------------------------------
+   5. BOTÕES
+   ------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: var(--raio-sm);
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.15s, opacity 0.15s;
+}
+
+.btn-primario {
+  background-color: var(--cor-primaria);
+  color: #fff;
+}
+.btn-primario:hover { background-color: var(--cor-primaria-escura); }
+
+.btn-secundario {
+  background-color: #fff;
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+}
+.btn-secundario:hover { background-color: var(--cor-fundo); }
+
+.btn-perigo {
+  background-color: var(--cor-perigo);
+  color: #fff;
+}
+.btn-perigo:hover { opacity: 0.9; }
+
+.btn-icone {
+  padding: 6px 10px;
+  border-radius: var(--raio-sm);
+  background: transparent;
+  color: var(--cor-texto-claro);
+}
+.btn-icone:hover { background-color: var(--cor-fundo); }
+
+/* -------------------------------------------------------------
+   6. TABELA
+   ------------------------------------------------------------- */
+.tabela-wrapper {
+  background-color: var(--cor-fundo-card);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela th,
+.tabela td {
+  padding: 12px var(--espaco-md);
+  text-align: left;
+  border-bottom: 1px solid var(--cor-borda);
+  white-space: nowrap;
+}
+
+.tabela th {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto-claro);
+  background-color: #f8fafc;
+}
+
+.tabela tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.tabela__acoes {
+  display: flex;
+  gap: var(--espaco-sm);
+}
+
+/* Valores coloridos */
+.valor-positivo { color: var(--cor-sucesso); font-weight: 600; }
+.valor-negativo { color: var(--cor-perigo); font-weight: 600; }
+
+/* Selos de tipo/status */
+.selo {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.selo-receita { background-color: var(--cor-sucesso-bg); color: var(--cor-sucesso); }
+.selo-despesa { background-color: var(--cor-perigo-bg); color: var(--cor-perigo); }
+.selo-paga { background-color: var(--cor-sucesso-bg); color: var(--cor-sucesso); }
+.selo-pendente { background-color: var(--cor-alerta-bg); color: var(--cor-alerta); }
+.selo-atrasada { background-color: var(--cor-perigo-bg); color: var(--cor-perigo); }
+
+/* -------------------------------------------------------------
+   7. BARRA DE FERRAMENTAS (busca + filtros + botão novo)
+   ------------------------------------------------------------- */
+.barra-ferramentas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-sm);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--espaco-md);
+}
+
+.barra-ferramentas__filtros {
+  display: flex;
+  gap: var(--espaco-sm);
+  flex-wrap: wrap;
+}
+
+.campo-busca {
+  position: relative;
+}
+
+.campo-busca input {
+  padding: 10px 14px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-sm);
+  font-size: 14px;
+  width: 260px;
+  max-width: 100%;
+}
+
+.campo-busca input:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+}
+
+/* -------------------------------------------------------------
+   8. FORMULÁRIO
+   ------------------------------------------------------------- */
+.form-campo {
+  margin-bottom: var(--espaco-md);
+}
+
+.form-campo label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--cor-texto-claro);
+}
+
+.form-campo input,
+.form-campo select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-sm);
+  font-size: 14px;
+  background-color: #fff;
+}
+
+.form-campo input:focus,
+.form-campo select:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+}
+
+.form-campo.erro input,
+.form-campo.erro select {
+  border-color: var(--cor-perigo);
+}
+
+.form-campo__erro {
+  color: var(--cor-perigo);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.form-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--espaco-sm);
+  margin-top: var(--espaco-lg);
+}
+
+/* -------------------------------------------------------------
+   9. MODAL
+   ------------------------------------------------------------- */
+.modal-fundo {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espaco-md);
+  z-index: 50;
+}
+
+.modal-fundo.oculto {
+  display: none;
+}
+
+.modal {
+  background-color: #fff;
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-modal);
+  width: 100%;
+  max-width: 420px;
+  padding: var(--espaco-lg);
+}
+
+.modal__cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--espaco-md);
+}
+
+.modal__titulo {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.modal__fechar {
+  background: transparent;
+  color: var(--cor-texto-claro);
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* -------------------------------------------------------------
+   10. CAIXA DE MENSAGEM (sucesso / erro)
+   ------------------------------------------------------------- */
+.mensagem {
+  padding: 12px var(--espaco-md);
+  border-radius: var(--raio-sm);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: var(--espaco-md);
+}
+
+.mensagem-sucesso {
+  background-color: var(--cor-sucesso-bg);
+  color: var(--cor-sucesso);
+  border: 1px solid #bbf7d0;
+}
+
+.mensagem-erro {
+  background-color: var(--cor-perigo-bg);
+  color: var(--cor-perigo);
+  border: 1px solid #fecaca;
+}
+
+.mensagem.oculta {
+  display: none;
+}
+
+/* -------------------------------------------------------------
+   11. CARD (dashboard)
+   ------------------------------------------------------------- */
+.card {
+  background-color: var(--cor-fundo-card);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: var(--espaco-lg);
+}
+
+.card__rotulo {
+  font-size: 13px;
+  color: var(--cor-texto-claro);
+  margin-bottom: 6px;
+}
+
+.card__valor {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* -------------------------------------------------------------
+   12. ESTADO VAZIO
+   ------------------------------------------------------------- */
+.estado-vazio {
+  text-align: center;
+  padding: var(--espaco-xl);
+  color: var(--cor-texto-claro);
+  font-size: 14px;
+}
+
+/* -------------------------------------------------------------
+   13. RESPONSIVIDADE
+   ------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .menu-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 40;
+    transform: translateX(-100%);
+  }
+
+  .menu-lateral.aberto {
+    transform: translateX(0);
+  }
+
+  .menu-botao-abrir {
+    display: inline-flex;
+  }
+
+  .campo-busca input {
+    width: 100%;
+  }
+
+  .barra-ferramentas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

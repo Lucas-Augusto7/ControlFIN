@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categorias | Controle Financeiro</title>
+  <link rel="stylesheet" href="../css/global.css">
+</head>
+<body>
+
+  <div class="layout">
+
+    <div id="menu-lateral"></div>
+
+    <main class="conteudo">
+
+      <h1 class="pagina-titulo">Categorias</h1>
+
+      <div id="caixaMensagem" class="mensagem oculta"></div>
+
+      <div class="barra-ferramentas">
+
+        <div class="barra-ferramentas__filtros">
+
+          <div class="campo-busca">
+            <input
+              type="search"
+              id="campoBusca"
+              placeholder="Buscar categoria..."
+            >
+          </div>
+
+          <div class="form-campo">
+            <select id="filtroTipo">
+              <option value="">Todos os tipos</option>
+              <option value="RECEITA">Receitas</option>
+              <option value="DESPESA">Despesas</option>
+            </select>
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-primario"
+          id="botaoNovaCategoria"
+        >
+          + Nova categoria
+        </button>
+
+      </div>
+
+      <div class="tabela-wrapper">
+
+        <table class="tabela">
+
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Tipo</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+
+          <tbody id="corpoTabela">
+            <tr>
+              <td colspan="3">Carregando categorias...</td>
+            </tr>
+          </tbody>
+
+        </table>
+
+        <div
+          id="estadoVazio"
+          class="estado-vazio"
+          style="display: none;"
+        >
+          Nenhuma categoria encontrada.
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- MODAL DE CATEGORIA -->
+
+  <div
+    id="modalFundo"
+    class="modal-fundo oculto"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitulo"
+  >
+
+    <div class="modal">
+
+      <div class="modal__cabecalho">
+
+        <h2 id="modalTitulo" class="modal__titulo">
+          Nova categoria
+        </h2>
+
+        <button
+          type="button"
+          class="modal__fechar"
+          id="botaoFecharModal"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <form id="formCategoria" novalidate>
+
+        <input type="hidden" id="categoriaId">
+
+        <div class="form-campo" id="campoNomeWrapper">
+
+          <label for="campoNome">Nome da categoria</label>
+
+          <input
+            type="text"
+            id="campoNome"
+            placeholder="Ex.: Alimentação"
+            maxlength="100"
+          >
+
+          <small id="erroNome" class="form-campo__erro"></small>
+
+        </div>
+
+        <div class="form-campo" id="campoTipoWrapper">
+
+          <label for="campoTipo">Tipo</label>
+
+          <select id="campoTipo">
+            <option value="">Selecione o tipo</option>
+            <option value="RECEITA">Receita</option>
+            <option value="DESPESA">Despesa</option>
+          </select>
+
+          <small id="erroTipo" class="form-campo__erro"></small>
+
+        </div>
+
+        <div class="form-acoes">
+
+          <button
+            type="button"
+            class="btn btn-secundario"
+            id="botaoCancelar"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primario"
+          >
+            Salvar categoria
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <!-- JAVASCRIPT -->
+
+  <script src="../js/api.js"></script>
+  <script src="../js/menu.js"></script>
+
+  <script>
+    montarMenu("categorias");
+  </script>
+
+  <script src="../js/categorias.js"></script>
+
+</body>
+</html>
