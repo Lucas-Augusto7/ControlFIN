@@ -1,9 +1,3 @@
-/* ===================================================================
-   API.JS — Controle Financeiro
-   Responsabilidade: Pessoa 3
-   Funções utilitárias de chamada à API, usadas por todas as telas.
-   Enquanto o back não estiver no ar, aponte API_URL para o mock.
-   =================================================================== */
 
 const API_URL = "http://localhost:8080/api";
 

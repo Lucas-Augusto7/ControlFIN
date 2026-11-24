@@ -1,9 +1,20 @@
+/* ===================================================================
+   GLOBAL.CSS — Controle Financeiro
+   Responsabilidade: Pessoa 3 (layout base, Contas e Categorias)
+   Este arquivo é importado por TODAS as páginas do projeto.
+   Só a Pessoa 3 deve alterar este arquivo.
+   =================================================================== */
 
+/* -------------------------------------------------------------
+   1. VARIÁVEIS GLOBAIS
+   ------------------------------------------------------------- */
 :root {
-  /* Cores principais */
-  --cor-primaria: #2563eb;
-  --cor-primaria-escura: #1d4ed8;
+  /* Cores principais — paleta "dinheiro" (verde cédula + dourado) */
+  --cor-primaria: #15803d;
+  --cor-primaria-escura: #116932;
   --cor-secundaria: #64748b;
+  --cor-destaque: #ca8a04;
+  --cor-destaque-clara: #eab308;
 
   /* Cores de feedback / status */
   --cor-sucesso: #16a34a;
@@ -14,11 +25,11 @@
   --cor-alerta-bg: #fef9c3;
 
   /* Neutras */
-  --cor-fundo: #f5f7fa;
+  --cor-fundo: #f7faf7;
   --cor-fundo-card: #ffffff;
   --cor-texto: #1f2937;
   --cor-texto-claro: #6b7280;
-  --cor-borda: #e2e8f0;
+  --cor-borda: #e2e8df;
 
   /* Layout */
   --espaco-xs: 4px;
@@ -93,12 +104,13 @@ button {
 .menu-lateral {
   width: var(--largura-menu);
   min-height: 100vh;
-  background-color: #111827;
+  background-color: #0f2e1b;
   color: #f9fafb;
   padding: var(--espaco-lg) 0;
   flex-shrink: 0;
   transition: transform 0.2s ease;
 }
+
 
 .menu-lateral__titulo {
   font-size: 18px;
@@ -106,6 +118,7 @@ button {
   padding: 0 var(--espaco-lg) var(--espaco-lg);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: var(--espaco-md);
+  color: var(--cor-destaque-clara);
 }
 
 .menu-lateral__links {
@@ -129,8 +142,8 @@ button {
 
 .menu-lateral__link.ativo {
   color: #ffffff;
-  border-left-color: var(--cor-primaria);
-  background-color: rgba(37, 99, 235, 0.15);
+  border-left-color: var(--cor-destaque-clara);
+  background-color: rgba(234, 179, 8, 0.12);
 }
 
 /* Botão hambúrguer (some em telas grandes) */
@@ -242,6 +255,7 @@ button {
 .selo-paga { background-color: var(--cor-sucesso-bg); color: var(--cor-sucesso); }
 .selo-pendente { background-color: var(--cor-alerta-bg); color: var(--cor-alerta); }
 .selo-atrasada { background-color: var(--cor-perigo-bg); color: var(--cor-perigo); }
+.selo-neutro { background-color: var(--cor-alerta-bg); color: var(--cor-destaque); }
 
 /* -------------------------------------------------------------
    7. BARRA DE FERRAMENTAS (busca + filtros + botão novo)
@@ -401,12 +415,10 @@ button {
   display: none;
 }
 
-/* -------------------------------------------------------------
-   11. CARD (dashboard)
-   ------------------------------------------------------------- */
 .card {
   background-color: var(--cor-fundo-card);
   border-radius: var(--raio);
+  border-top: 3px solid var(--cor-destaque-clara);
   box-shadow: var(--sombra);
   padding: var(--espaco-lg);
 }
@@ -422,9 +434,6 @@ button {
   font-weight: 700;
 }
 
-/* -------------------------------------------------------------
-   12. ESTADO VAZIO
-   ------------------------------------------------------------- */
 .estado-vazio {
   text-align: center;
   padding: var(--espaco-xl);
@@ -432,9 +441,30 @@ button {
   font-size: 14px;
 }
 
-/* -------------------------------------------------------------
-   13. RESPONSIVIDADE
-   ------------------------------------------------------------- */
+.contas-acoes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.contas-acoes select {
+  width: 180px;
+  padding: 10px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-sm);
+  background-color: #fff;
+  color: var(--cor-texto);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.contas-acoes button {
+  width: 180px;
+  justify-content: center;
+}
+
 @media (max-width: 768px) {
   .layout {
     flex-direction: column;

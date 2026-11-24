@@ -1,16 +1,3 @@
-/* ===================================================================
-   CATEGORIAS.JS — Controle Financeiro
-   Responsabilidade: Pessoa 3
-
-   Depende de api.js (window.api) já carregado antes deste arquivo.
-   Segue o contrato:
-     GET    /api/categorias?busca=texto&tipo=RECEITA
-     POST   /api/categorias        body: { nome, tipo }
-     PUT    /api/categorias/{id}   body: { nome, tipo }
-     DELETE /api/categorias/{id}
-   =================================================================== */
-
-// ---- Referências dos elementos da página ----
 const corpoTabela = document.getElementById("corpoTabela");
 const estadoVazio = document.getElementById("estadoVazio");
 const campoBusca = document.getElementById("campoBusca");
@@ -30,23 +17,16 @@ const botaoCancelar = document.getElementById("botaoCancelar");
 
 let temporizadorBusca = null;
 
-// ---------------------------------------------------------------
-// MENSAGENS
-// ---------------------------------------------------------------
 function mostrarMensagem(texto, tipo) {
   caixaMensagem.textContent = texto;
   caixaMensagem.className = "mensagem " + (tipo === "erro" ? "mensagem-erro" : "mensagem-sucesso");
 
-  // some sozinha depois de alguns segundos
   clearTimeout(mostrarMensagem._timer);
   mostrarMensagem._timer = setTimeout(() => {
     caixaMensagem.classList.add("oculta");
   }, 4000);
 }
 
-// ---------------------------------------------------------------
-// LISTAGEM
-// ---------------------------------------------------------------
 async function carregarCategorias() {
   const busca = campoBusca.value.trim();
   const tipo = filtroTipo.value;
@@ -95,9 +75,6 @@ function renderizarTabela(categorias) {
   });
 }
 
-// ---------------------------------------------------------------
-// BUSCA (com debounce) E FILTRO
-// ---------------------------------------------------------------
 campoBusca.addEventListener("input", () => {
   clearTimeout(temporizadorBusca);
   temporizadorBusca = setTimeout(carregarCategorias, 400);
@@ -105,9 +82,6 @@ campoBusca.addEventListener("input", () => {
 
 filtroTipo.addEventListener("change", carregarCategorias);
 
-// ---------------------------------------------------------------
-// MODAL: abrir / fechar
-// ---------------------------------------------------------------
 function abrirModalCriacao() {
   modalTitulo.textContent = "Nova categoria";
   categoriaIdInput.value = "";
@@ -134,14 +108,10 @@ botaoNovaCategoria.addEventListener("click", abrirModalCriacao);
 botaoFecharModal.addEventListener("click", fecharModal);
 botaoCancelar.addEventListener("click", fecharModal);
 
-// fecha clicando fora do modal
 modalFundo.addEventListener("click", (evento) => {
   if (evento.target === modalFundo) fecharModal();
 });
 
-// ---------------------------------------------------------------
-// VALIDAÇÃO DO FORMULÁRIO (front)
-// ---------------------------------------------------------------
 function limparErrosFormulario() {
   document.getElementById("campoNomeWrapper").classList.remove("erro");
   document.getElementById("campoTipoWrapper").classList.remove("erro");
@@ -168,9 +138,6 @@ function validarFormulario() {
   return valido;
 }
 
-// ---------------------------------------------------------------
-// SALVAR (criar ou editar)
-// ---------------------------------------------------------------
 formCategoria.addEventListener("submit", async (evento) => {
   evento.preventDefault();
 
@@ -193,15 +160,10 @@ formCategoria.addEventListener("submit", async (evento) => {
     fecharModal();
     carregarCategorias();
   } catch (erro) {
-    // Erro 409 (nome duplicado) ou qualquer outro erro da API
-    // aparece aqui, com a mensagem exata que o back mandou.
     mostrarMensagem(erro.message, "erro");
   }
 });
 
-// ---------------------------------------------------------------
-// EXCLUIR
-// ---------------------------------------------------------------
 async function excluirCategoria(id) {
   const confirmar = confirm("Tem certeza que deseja excluir esta categoria?");
   if (!confirmar) return;
@@ -211,13 +173,8 @@ async function excluirCategoria(id) {
     mostrarMensagem("Categoria excluída com sucesso.", "sucesso");
     carregarCategorias();
   } catch (erro) {
-    // Se a categoria tiver transações, o back devolve 409
-    // e a mensagem exata aparece aqui.
     mostrarMensagem(erro.message, "erro");
   }
 }
 
-// ---------------------------------------------------------------
-// INICIALIZAÇÃO
-// ---------------------------------------------------------------
 carregarCategorias();

@@ -19,37 +19,34 @@
 
       <div id="caixaMensagem" class="mensagem oculta"></div>
 
-      <div class="barra-ferramentas">
+      
+<div class="barra-ferramentas">
 
-        <div class="barra-ferramentas__filtros">
+  <div class="campo-busca">
+    <input
+      type="text"
+      id="campoBusca"
+      placeholder="Buscar por nome..."
+    />
+  </div>
 
-          <div class="campo-busca">
-            <input
-              type="search"
-              id="campoBusca"
-              placeholder="Buscar categoria..."
-            >
-          </div>
+  <div class="contas-acoes">
 
-          <div class="form-campo">
-            <select id="filtroTipo">
-              <option value="">Todos os tipos</option>
-              <option value="RECEITA">Receitas</option>
-              <option value="DESPESA">Despesas</option>
-            </select>
-          </div>
+    <select id="filtroTipo" class="form-campo">
+      <option value="">Todos os tipos</option>
+      <option value="CORRENTE">Conta corrente</option>
+      <option value="POUPANCA">Poupança</option>
+      <option value="CARTEIRA">Carteira</option>
+      <option value="CARTAO">Cartão</option>
+    </select>
 
-        </div>
+    <button class="btn btn-primario" id="botaoNovaConta">
+      + Nova conta
+    </button>
 
-        <button
-          type="button"
-          class="btn btn-primario"
-          id="botaoNovaCategoria"
-        >
-          + Nova categoria
-        </button>
+  </div>
+</div>
 
-      </div>
 
       <div class="tabela-wrapper">
 
@@ -85,7 +82,6 @@
 
   </div>
 
-  <!-- MODAL DE CATEGORIA -->
 
   <div
     id="modalFundo"
@@ -170,8 +166,6 @@
     </div>
 
   </div>
-
-  <!-- JAVASCRIPT -->
 
   <script src="../js/api.js"></script>
   <script src="../js/menu.js"></script>
